@@ -18,7 +18,7 @@ export const Login = () => {
     useEffect(() => {
 
         console.log(loggedIn)
-        if (loggedIn)
+        if (loggedIn.loggedIn)
             history.push('/dashboard')
     }, [loggedIn]);
 
@@ -38,7 +38,7 @@ export const Login = () => {
             if (data.hasOwnProperty("user")) {
                 localStorage.setItem("loginDetails", JSON.stringify(
                     data));
-                setLoggedIn(true);
+                setLoggedIn({loggedIn: true, checked: true});
                 history.push('/dashboard')
             } else if (data.hasOwnProperty("errors")) {
                 setInvalidCredential(true);

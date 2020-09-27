@@ -5,8 +5,12 @@ import {UserContext} from "../context/UserContext";
 
 const Nav = () => {
 
-    const {loggedIn} = useContext(UserContext)
-    // console.log("islogg:", isLoggedIn)
+    const {loggedIn, setLoggedIn} = useContext(UserContext)
+
+    const logOutHandler = () => {
+        localStorage.removeItem("loginDetails");
+        setLoggedIn({loggedIn: false, checked: true});
+    }
 
     return (
         <header className={styles.mainHeader}>
@@ -16,9 +20,19 @@ const Nav = () => {
                     <nav>
                         <NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/'} exact>Home</NavLink>
                         <NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/articles'}>All Articles</NavLink>
-                        <NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/feed'}>My Feed</NavLink>
+                        {/*<NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/feed'}>My Feed</NavLink>*/}
                         <NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/about'}>About</NavLink>
-                        <NavLink className={`${styles.navItem} ${styles.cta}`} to={'/login'}>{loggedIn ? "Logout" : "Login"}</NavLink>
+                        {loggedIn.loggedIn
+                            ? (<div className={styles.submenuContainer}>
+                                <NavLink to={'#'} className={`${styles.navItem} ${styles.cta}`}>My Account</NavLink>
+                                <div className={styles.submenu}>
+                                    <NavLink className={styles.navItem} to={'/dashboard'}>Dashboard</NavLink>
+                                    <NavLink className={styles.navItem} to={'/feed'}>My Feed</NavLink>
+                                    <NavLink className={styles.navItem} to={"#"} onClick={logOutHandler}>Logout</NavLink>
+                                </div>
+                            </div>)
+                            : <NavLink className={`${styles.navItem} ${styles.cta}`} to={'/login'}>Login</NavLink>
+                        }
                     </nav>
                 </div>
             </div>

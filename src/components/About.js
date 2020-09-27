@@ -8,7 +8,7 @@ const About = () => {
     return (
         <div>
             <p>about</p>
-            <p>user is {loggedIn ? "logged in" : "not logged ini"}</p>
+            <p>user is {loggedIn.loggedIn ? "logged in" : "not logged ini"}</p>
         </div>
     )
 }

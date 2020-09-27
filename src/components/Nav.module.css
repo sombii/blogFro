@@ -24,6 +24,7 @@ a.navItem:not(:last-child) {
 
 a.navItem.cta {
     background-color: #e32e2e;
+    color: #fda3a3;
     /*background-color: #ea5455;*/
 }
 
@@ -37,4 +38,29 @@ a.navItem.cta:hover {
 
 .activeNavItem {
     background-color: #171717;
+}
+
+
+/*sub menu*/
+
+.submenuContainer {
+    display: inline-block;
+    position: relative;
+}
+
+.submenuContainer:hover .submenu {
+    display: block;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 140%;
+    left: 0;
+    background-color: #171717;
+    /*padding: 1rem;*/
+}
+
+.submenu .navItem {
+    display: block;
 }

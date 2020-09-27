@@ -11,10 +11,12 @@ import {Login} from "./components/auth/Login";
 import {DashBoard} from "./components/dashboard/Dashboard";
 import {UserContext} from "./context/UserContext";
 import {isLoggedIn} from "./services/request";
+import {ProtectedRoute} from "./utils/ProtectedRoute";
+import {Redirect} from "react-router";
 
 function App() {
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState({loggedIn: false, checked: false});
 
     useEffect(() => {
         const loginData = JSON.parse(localStorage.getItem('loginDetails'));
@@ -23,44 +25,51 @@ function App() {
             const reqHeader = {"Authorization": `Token ${loginData.user.token}`};
 
             isLoggedIn(reqHeader).then(data => {
-                if (data.status === 200) setLoggedIn(true);
+                if (data.status === 200) setLoggedIn({loggedIn: true, checked: true});
                 if (data.status === 401) {
-                    setLoggedIn(false);
+                    setLoggedIn({loggedIn: false, checked: true});
                     localStorage.removeItem('loginDetails')
-                };
+                }
+                ;
             });
+        } else {
+            setLoggedIn({loggedIn: false, checked: true});
         }
     }, [])
 
 
     return (
         <UserContext.Provider value={{loggedIn, setLoggedIn}}>
-            <div className="container-fluid">
-                <Nav/>
-                <div className="container">
-                    <Switch>
-                        <Route path={'/'} exact>
-                            <Home/>
-                        </Route>
-                        <Route path={'/articles'}>
-                            <ArticleList/>
-                        </Route>
-                        <Route path={'/about'}>
-                            <About/>
-                        </Route>
-                        <Route path={'/feed'}>
-                            <MyFeed/>
-                        </Route>
-                        {/*<PRoute path={'/login'} component={Login}>*/}
-                        <Route path={'/login'} component={Login}/>
-                        <Route path={'/dashboard'} component={DashBoard}/>
-                        <Route path={'/:slug'} component={Article}/>
+            {loggedIn.checked
+                ? <div className="container-fluid">
+                    <Nav/>
+                    <div className="container">
+                        <Switch>
+                            <Route path={'/'} exact>
+                                <Home/>
+                            </Route>
+                            <Route path={'/articles'}>
+                                <ArticleList/>
+                            </Route>
+                            <Route path={'/about'}>
+                                <About/>
+                            </Route>
+                            {/*<PRoute path={'/login'} component={Login}>*/}
+                            <Route path={'/login'} component={Login}/>
+                            {/*<Route path={'/dashboard'}>{loggedIn.loggedIn ? <DashBoard/> : <Redirect to={'/login'}/>}</Route>*/}
+                            <ProtectedRoute path={'/dashboard'} component={DashBoard}/>
+                            <ProtectedRoute path={'/feed'} component={MyFeed}/>
+                            <Route path={'/:slug'} component={Article}/>
 
-                    </Switch>
+                        </Switch>
+                    </div>
                 </div>
-            </div>
+                : "loading"
+            }
         </UserContext.Provider>
-    );
+    )
+
+
 }
 
 export default App;
