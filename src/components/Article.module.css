@@ -1,0 +1,40 @@
+/*all articles css styles*/
+/*all articles css styles*/
+
+.articlesContainer {
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(21rem, auto));
+    gap: 1rem;
+
+}
+
+.articleCardLink h3 {
+    color: #bbbbbb;
+}
+
+.articleCard {
+    padding: 1rem;
+    height: 100%;
+    border-radius: 0.5rem;
+    /*background-color: #1d1d1d;*/
+    background-color: #41444b;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*Single article styles*/
+/*Single article styles*/
+
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.articleContainer {
+    margin: 1rem 0;
+    padding: 2rem 0;
+}

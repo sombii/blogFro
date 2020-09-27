@@ -1,0 +1,40 @@
+/*header css styles*/
+/*header css styles*/
+
+.mainHeader {
+    background-color: #1d1d1d;
+}
+
+.container {
+    /*max-width: 1120px;*/
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+a.navItem {
+    color: #bbbbbb;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+a.navItem:not(:last-child) {
+    margin-right: 1rem;
+}
+
+a.navItem.cta {
+    background-color: #e32e2e;
+    /*background-color: #ea5455;*/
+}
+
+a.navItem:hover {
+    background-color: #171717;
+}
+
+a.navItem.cta:hover {
+    background-color: #e55c5c;
+}
+
+.activeNavItem {
+    background-color: #171717;
+}
