@@ -1,9 +1,15 @@
 html, body {
     background-color: #2b2b2b;
+    color: #bbbbbb;
+}
+
+h1 {
+    color: #bbbbbb;
 }
 
 a, a:visited, a:focus, a:hover{
     text-decoration: none;
+    color: white;
 }
 
 small {
@@ -20,70 +26,29 @@ small {
     max-width: 1120px;
 }
 
-/*header css styles*/
-/*header css styles*/
-
-.mainHeader {
-    background-color: #1d1d1d;
+/*loading icon css*/
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    /*margin: auto;*/
 }
-
-.mainHeader .container {
-    padding: 2rem 1rem;
-    display: flex;
-    justify-content: space-between;
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fcf;
+    border-color: #fcf transparent #fcf transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
 }
-
-a.navItem {
-    color: #bbbbbb;
-    padding: 1rem;
-    border-radius: 0.25rem;
-}
-
-a.navItem:not(:last-child) {
-    margin-right: 1rem;
-}
-
-a.navItem.cta {
-    background-color: #f33a3a;
-}
-
-a.navItem:hover {
-    background-color: #171717;
-}
-
-a.navItem.cta:hover {
-    background-color: #e55c5c;
-}
-
-.activeNavItem {
-    background-color: #171717;
-}
-
-/*all articles css styles*/
-/*all articles css styles*/
-
-.articlesContainer {
-    margin: 1rem 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(21rem, auto));
-    gap: 1rem;
-
-}
-
-.articleCard {
-    padding: 1rem;
-    height: 100%;
-    border-radius: 0.5rem;
-    background-color: #1d1d1d;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/*Single article styles*/
-/*Single article styles*/
-
-.articleContainer {
-    margin: 1rem 0;
-    padding: 2rem 0;
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
