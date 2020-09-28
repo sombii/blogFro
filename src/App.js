@@ -4,7 +4,7 @@ import Nav from "./components/Nav";
 import Home from "./components/Home";
 import {Switch, Route} from 'react-router-dom'
 import ArticleList from "./components/ArticleList";
-import About from "./components/About";
+import Register from "./components/auth/Register";
 import MyFeed from "./components/MyFeed";
 import Article from "./components/Article";
 import {Login} from "./components/auth/Login";
@@ -12,7 +12,7 @@ import {DashBoard} from "./components/dashboard/Dashboard";
 import {UserContext} from "./context/UserContext";
 import {isLoggedIn} from "./services/request";
 import {ProtectedRoute} from "./utils/ProtectedRoute";
-import {Redirect} from "react-router";
+// import {Redirect} from "react-router";
 
 function App() {
 
@@ -25,12 +25,15 @@ function App() {
             const reqHeader = {"Authorization": `Token ${loginData.user.token}`};
 
             isLoggedIn(reqHeader).then(data => {
-                if (data.status === 200) setLoggedIn({loggedIn: true, checked: true});
-                if (data.status === 401) {
+                if (data.hasOwnProperty('error')) {
                     setLoggedIn({loggedIn: false, checked: true});
-                    localStorage.removeItem('loginDetails')
+                } else {
+                    if (data.status === 200) setLoggedIn({loggedIn: true, checked: true});
+                    if (data.status === 401) {
+                        setLoggedIn({loggedIn: false, checked: true});
+                        localStorage.removeItem('loginDetails')
+                    }
                 }
-                ;
             });
         } else {
             setLoggedIn({loggedIn: false, checked: true});
@@ -51,8 +54,8 @@ function App() {
                             <Route path={'/articles'}>
                                 <ArticleList/>
                             </Route>
-                            <Route path={'/about'}>
-                                <About/>
+                            <Route path={'/register'}>
+                                <Register/>
                             </Route>
                             {/*<PRoute path={'/login'} component={Login}>*/}
                             <Route path={'/login'} component={Login}/>

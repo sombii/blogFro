@@ -1,4 +1,11 @@
 .loginForm {
     max-width: 25rem;
     margin: 3rem auto;
+    background-color: #41444b;
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+.loginForm h2 {
+    color: #ffccff;
 }

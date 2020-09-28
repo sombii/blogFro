@@ -21,7 +21,9 @@ const Nav = () => {
                         <NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/'} exact>Home</NavLink>
                         <NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/articles'}>All Articles</NavLink>
                         {/*<NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/feed'}>My Feed</NavLink>*/}
-                        <NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/about'}>About</NavLink>
+                        {!loggedIn.loggedIn &&
+                        <NavLink activeClassName={styles.activeNavItem} className={styles.navItem} to={'/register'}>SignUp</NavLink>
+                        }
                         {loggedIn.loggedIn
                             ? (<div className={styles.submenuContainer}>
                                 <NavLink to={'#'} className={`${styles.navItem} ${styles.cta}`}>My Account</NavLink>
