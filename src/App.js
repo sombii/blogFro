@@ -60,9 +60,10 @@ function App() {
                             {/*<PRoute path={'/login'} component={Login}>*/}
                             <Route path={'/login'} component={Login}/>
                             {/*<Route path={'/dashboard'}>{loggedIn.loggedIn ? <DashBoard/> : <Redirect to={'/login'}/>}</Route>*/}
-                            <ProtectedRoute path={'/dashboard'} component={DashBoard}/>
                             <ProtectedRoute path={'/feed'} component={MyFeed}/>
+                            <ProtectedRoute path={'/dashboard'} component={DashBoard}/>
                             <Route path={'/:slug'} component={Article}/>
+                            <Route component={NotFound}/>
 
                         </Switch>
                     </div>
@@ -71,8 +72,15 @@ function App() {
             }
         </UserContext.Provider>
     )
+}
 
-
+const NotFound = () => {
+    return (
+        <div className={'vertical-center'}>
+            <p>Opooos, the page you trying to access doesn't exist or is deleted.</p>
+            <button>Back to Home</button>
+        </div>
+    )
 }
 
 export default App;
