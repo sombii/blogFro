@@ -7,9 +7,17 @@ h1 {
     color: #bbbbbb;
 }
 
+h2 {
+    color: #ffccff;
+}
+
 a, a:visited, a:focus, a:hover{
     text-decoration: none;
     color: white;
+}
+
+input {
+    color: #bbbbbb;
 }
 
 small {

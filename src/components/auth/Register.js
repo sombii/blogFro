@@ -33,7 +33,7 @@ const Register = () => {
             if (data.hasOwnProperty("user")) {
                 localStorage.setItem("loginDetails", JSON.stringify(
                     data));
-                setLoggedIn({loggedIn: true, checked: true});
+                setLoggedIn({loggedIn: true, checked: true, user: {...data.user}});
                 history.push('/dashboard')
             } else if (data.hasOwnProperty("errors")) {
                 setRegError({errors: data.errors, error: true})

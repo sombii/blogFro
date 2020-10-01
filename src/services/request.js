@@ -25,19 +25,63 @@ const get = async (url) => {
     }
 }
 
-export const getArticles = async () => {
+export const isLoggedIn = async (request) => {
+
+    try {
+        const response = await axios.get(`${baseUrl}user`,
+            {
+                headers: request
+            });
+        if (response.status === 200) {
+            console.log("hahaha")
+            // console.log(response.data)
+            return response;
+        }
+
+    } catch (error) {
+        console.log("haha", error.request)
+        if (error.request) {
+            return {error: "check you intuernet"}
+        }
+        if (error.response.status === 401) {
+            console.log(error.response)
+            return error.response
+        }
+    }
+}
+
+export const getProfile = async (name) => {
+    const response = await get(`profiles/${name}`)
+
+    if (response.hasOwnProperty('error'))
+        return response;
+    return response.profile;
+}
+
+export const getArticles = async (suffix) => {
     // ?&limit=20
-    const response = await get(`articles`)
+    const response = await get(suffix)
     // console.log(response)
     if (response.hasOwnProperty('error'))
         return response;
     return response.articles;
 }
 
+export const getTags = async () => {
+    // ?&limit=20
+    const response = await get(`tags`)
+    // console.log(response)
+    if (response.hasOwnProperty('error'))
+        return response;
+    return response;
+}
+
 export const getSingleArticle = async (slug) => {
     const response = await get(`articles/${slug}`)
     return response.article;
 }
+
+
 
 export const login = async (request) => {
     // console.log(request)
@@ -86,12 +130,11 @@ export const register = async (request) => {
 }
 
 
-export const isLoggedIn = async (request) => {
-
+export const createArticle = async (token,request) => {
     try {
-        const response = await axios.get(`${baseUrl}user`,
+        const response = await axios.post(`${baseUrl}articles`,request,
             {
-                headers: request
+                headers: {Authorization: `Token ${token}`}
             });
         if (response.status === 200) {
             console.log("hahaha")
@@ -101,14 +144,15 @@ export const isLoggedIn = async (request) => {
 
     } catch (error) {
         console.log("haha", error.request)
-        if (error.request) {
-            return {error: "check you intuernet"}
-        }
-        if (error.response.status === 401) {
-            console.log(error.response)
-            return error.response
+        if (error.response) {
+            return error.response.data;
+        } else if (error.request) {
+            return {
+                "Network Error": "Check Internet Connection"
+            }
+        } else {
+            console.log(error.message)
         }
     }
 }
-
 // export {getArticles, getSingleArticle};

@@ -1,0 +1,55 @@
+.dashContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 2rem 0;
+    min-height: 100vh;
+}
+
+.dashNav {
+    padding: 1rem 0;
+    /*margin-right: 2rem;*/
+    background-color: #41444b;
+    /*text-align: left;*/
+}
+
+.dashNav a {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem 5rem 0.5rem 1rem;
+    border-right: 2px solid #41444b;
+
+}
+
+.dashMain {
+    flex-grow: 1;
+    padding: 2rem;
+    /*background-color: #1d1d1d;*/
+}
+
+.dashItems {
+    margin-right: 1rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    background-color: #41444b;
+    /*width: 100%;*/
+    display: inline-block;
+}
+
+.dashItems small {
+    max-width: 10rem;
+    display: inline-block;
+    color: #fda3a3;
+}
+
+.dashNav .active {
+    background-color: #1d1d1d;
+    border-right: 2px solid #e32e2e;
+}
+
+/*create art*/
+
+.formHeadingDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

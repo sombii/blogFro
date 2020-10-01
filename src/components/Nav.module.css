@@ -43,6 +43,9 @@ a.navItem.cta:hover {
 
 /*sub menu*/
 
+.submenuContainer a.navItem{
+    margin-right: 0;
+}
 .submenuContainer {
     display: inline-block;
     position: relative;
@@ -55,7 +58,7 @@ a.navItem.cta:hover {
 .submenu {
     display: none;
     position: absolute;
-    top: 140%;
+    top: 150%;
     left: 0;
     background-color: #171717;
     /*padding: 1rem;*/

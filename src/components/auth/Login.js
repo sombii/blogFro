@@ -37,7 +37,7 @@ export const Login = () => {
             if (data.hasOwnProperty("user")) {
                 localStorage.setItem("loginDetails", JSON.stringify(
                     data));
-                setLoggedIn({loggedIn: true, checked: true});
+                setLoggedIn({loggedIn: true, checked: true,user: {...data.user}});
                 history.push('/dashboard')
             } else if (data.hasOwnProperty("errors")) {
                 setInvalidCredential(true);

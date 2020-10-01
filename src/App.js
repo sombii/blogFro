@@ -12,11 +12,11 @@ import {DashBoard} from "./components/dashboard/Dashboard";
 import {UserContext} from "./context/UserContext";
 import {isLoggedIn} from "./services/request";
 import {ProtectedRoute} from "./utils/ProtectedRoute";
-// import {Redirect} from "react-router";
+import {Profile} from "./components/Profile";
 
 function App() {
 
-    const [loggedIn, setLoggedIn] = useState({loggedIn: false, checked: false});
+    const [loggedIn, setLoggedIn] = useState({loggedIn: false, checked: false, user: {}});
 
     useEffect(() => {
         const loginData = JSON.parse(localStorage.getItem('loginDetails'));
@@ -26,17 +26,17 @@ function App() {
 
             isLoggedIn(reqHeader).then(data => {
                 if (data.hasOwnProperty('error')) {
-                    setLoggedIn({loggedIn: false, checked: true});
+                    setLoggedIn({...loggedIn, checked: true});
                 } else {
-                    if (data.status === 200) setLoggedIn({loggedIn: true, checked: true});
+                    if (data.status === 200) setLoggedIn({loggedIn: true, checked: true, user: {...data.data.user}});
                     if (data.status === 401) {
-                        setLoggedIn({loggedIn: false, checked: true});
+                        setLoggedIn({...loggedIn, checked: true});
                         localStorage.removeItem('loginDetails')
                     }
                 }
             });
         } else {
-            setLoggedIn({loggedIn: false, checked: true});
+            setLoggedIn({loggedIn: false, checked: true, user: {}});
         }
     }, [])
 
@@ -51,16 +51,21 @@ function App() {
                             <Route path={'/'} exact>
                                 <Home/>
                             </Route>
+                            <Route path={'/articles/:tag'} >
+                                <ArticleList/>
+                            </Route>
                             <Route path={'/articles'}>
                                 <ArticleList/>
                             </Route>
                             <Route path={'/register'}>
                                 <Register/>
                             </Route>
-                            {/*<PRoute path={'/login'} component={Login}>*/}
+                            <Route path={'/profile/:username'} component={Profile}/>
                             <Route path={'/login'} component={Login}/>
                             {/*<Route path={'/dashboard'}>{loggedIn.loggedIn ? <DashBoard/> : <Redirect to={'/login'}/>}</Route>*/}
                             <ProtectedRoute path={'/feed'} component={MyFeed}/>
+                            {/*<ProtectedRoute path={'/dashboard/profile'} component={Profile}/>*/}
+                            {/*<ProtectedRoute path={'/dashboard/create'} component={CreateArticle}/>*/}
                             <ProtectedRoute path={'/dashboard'} component={DashBoard}/>
                             <Route path={'/:slug'} component={Article}/>
                             <Route component={NotFound}/>
@@ -77,7 +82,7 @@ function App() {
 const NotFound = () => {
     return (
         <div className={'vertical-center'}>
-            <p>Opooos, the page you trying to access doesn't exist or is deleted.</p>
+            <p>Oops, the page you trying to access doesn't exist or is deleted.</p>
             <button>Back to Home</button>
         </div>
     )

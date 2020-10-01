@@ -1,0 +1,43 @@
+.mainContainer {
+    /*display: grid;*/
+    /*grid-template-columns: repeat(auto-fill, minmax(auto, 1fr));*/
+    display: flex;
+    margin: 2rem 0;
+}
+
+.contentSection {
+    flex-grow: 1;
+}
+
+.sidebarSection {
+    align-self: flex-end;
+    /*padding: 1rem;*/
+    max-width: 18rem;
+}
+
+.tagsBar h4 {
+    color: #bbbbbb;
+}
+
+.tagsBar {
+    background-color: #41444b;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+.tag {
+    list-style: none;
+    display: inline-block;
+    margin: 0.2rem;
+}
+
+.tag a {
+    padding: 0.2rem 0.3rem;
+    background-color: #cd8686;
+    color: #2b2b2b;
+    border-radius: 3rem;
+}
+
+.tag:nth-child(odd) a {
+    background-color: #4ea88a;
+}

@@ -9,7 +9,7 @@ const Nav = () => {
 
     const logOutHandler = () => {
         localStorage.removeItem("loginDetails");
-        setLoggedIn({loggedIn: false, checked: true});
+        setLoggedIn({loggedIn: false, checked: true, user: {}});
     }
 
     return (
@@ -26,7 +26,7 @@ const Nav = () => {
                         }
                         {loggedIn.loggedIn
                             ? (<div className={styles.submenuContainer}>
-                                <NavLink to={'#'} className={`${styles.navItem} ${styles.cta}`}>My Account</NavLink>
+                                <NavLink to={'#'} className={`${styles.navItem} muted-button`}>{loggedIn.user.username}</NavLink>
                                 <div className={styles.submenu}>
                                     <NavLink className={styles.navItem} to={'/dashboard'}>Dashboard</NavLink>
                                     <NavLink className={styles.navItem} to={'/feed'}>My Feed</NavLink>
